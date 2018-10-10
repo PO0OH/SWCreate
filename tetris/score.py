@@ -20,3 +20,6 @@ class ScoreManager:
 
     def getLevel():
         return int( ScoreManager.s_lines / ScoreManager.s_linesPerLevel )
+
+    def restLevel(self):
+        self.s_lines = 0

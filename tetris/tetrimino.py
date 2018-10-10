@@ -248,7 +248,7 @@ class TetriminoManager:
 
     # moves the spawned tetrimino one unit down the board if possible
     # otherwise spawn a new tetrimino
-    def moveTetriminoDown( self ):
+    def moveTetriminoDown( self):
         moved = False
         if self.m_spawnedTetrimino.shouldFixToBoard( self.m_board ):
             # the tetrimino reached the top of the board? ( failed )
@@ -269,7 +269,7 @@ class TetriminoManager:
 
     # handle input
     def keyPressed( self, key ):
-        if key == pygame.K_SPACE:
+        if key == pygame.K_UP:
             if self.m_spawnedTetrimino.willCollideWithBoard( (0,0), self.m_board, True ) == False: 
                 self.m_spawnedTetrimino.nextRepresentation()
         elif key == pygame.K_RIGHT:
@@ -281,7 +281,9 @@ class TetriminoManager:
             if self.m_spawnedTetrimino.willCollideWithBoard( deltaPos, self.m_board, False ) == False: 
                 self.m_spawnedTetrimino.move( deltaPos )
         elif key == pygame.K_DOWN:
-            self.moveTetriminoDown()
+            self.moveTetriminoDown(1)
+        elif key == pygame.K_SPACE :
+            self.moveTetriminoDown(2)
         return
 
 

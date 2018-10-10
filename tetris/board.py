@@ -24,6 +24,7 @@ class Board:
     def resetForGame( self ):
         # clear the tile array
         self.m_tilesFilled = []
+        score.ScoreManager.s_lines = 0
         return
 
 
