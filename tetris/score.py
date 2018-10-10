@@ -10,7 +10,7 @@ class ScoreManager:
 
 
     def addLine():
-        ScoreManager.s_lines = ScoreManager.s_lines + 1
+        ScoreManager.s_lines = ScoreManager.s_lines + 100
         if ScoreManager.s_lines % ScoreManager.s_linesPerLevel == 0:
             ScoreManager.s_speed = ScoreManager.s_speed - ScoreManager.s_levelIncreaseSpeed
             if ScoreManager.s_speed < ScoreManager.s_speedClamp:

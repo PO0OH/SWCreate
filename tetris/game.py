@@ -1,6 +1,7 @@
 import pygame
 import tetrimino
 import board
+import score
 
 class BaseState:
 
@@ -36,6 +37,30 @@ class IntroState( BaseState ):
         self.m_screen.blit( self.m_logo, logoRect )
         return
 
+class GameOverState( BaseState ):
+
+
+    def enter( self, screen ):
+        self.m_screen = screen
+        self.m_logo   = pygame.image.load( "gameover.jpg" )
+
+    def handleEvent( self, event ):
+        # 키보드에서 키를 눌러요
+        if event.type == pygame.KEYDOWN:
+            # 근데 그 키가 'q'라면?
+            if event.key == pygame.K_q:
+                # 게임 꺼버리기~
+                pygame.display.quit()
+            # 그 키가 'Q'가 아니라면?
+            else:
+                self.m_transition = InGameState()
+        return
+
+    def render( self ):
+        logoRect = self.m_logo.get_rect()
+        self.m_screen.blit( self.m_logo, logoRect )
+        return
+
 class InGameState( BaseState ):
 
     """In-game state"""
@@ -58,7 +83,7 @@ class InGameState( BaseState ):
         self.m_tetriminoMgr.update()
         # failed?
         if self.m_tetriminoMgr.m_failed:
-            self.m_transition = IntroState()
+            self.m_transition = GameOverState()
         return
 
     def render( self ):

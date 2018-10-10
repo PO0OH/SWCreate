@@ -24,6 +24,7 @@ class Board:
     def resetForGame( self ):
         # clear the tile array
         self.m_tilesFilled = []
+        score.ScoreManager.s_lines = 0
         return
 
 
@@ -81,7 +82,7 @@ class Board:
     # render filled parts of the board
     def render( self ):
         # render score pane
-        fontSurface = self.m_font.render( "Lines:" + str( score.ScoreManager.s_lines ), 1, ( 255, 255, 255 ) )
+        fontSurface = self.m_font.render( "Score:" + str( score.ScoreManager.s_lines ), 1, ( 255, 255, 255 ) )
         self.m_screenSurface.blit( fontSurface, (10,10) )
 
         # render tiles

@@ -237,6 +237,8 @@ class TetriminoManager:
         self.m_spawner = TetriminoSpawner()
         # spawn an initial tetrimino
         self.spawnNewTetrimino()
+
+        self.i_am_paused = False
         return
 
 
@@ -269,7 +271,12 @@ class TetriminoManager:
 
     # handle input
     def keyPressed( self, key ):
-        if key == pygame.K_SPACE:
+        if key == pygame.K_p:
+            self.i_am_paused = not self.i_am_paused
+        if self.i_am_paused:
+            return
+
+        if key == pygame.K_UP:
             if self.m_spawnedTetrimino.willCollideWithBoard( (0,0), self.m_board, True ) == False: 
                 self.m_spawnedTetrimino.nextRepresentation()
         elif key == pygame.K_RIGHT:
@@ -282,10 +289,17 @@ class TetriminoManager:
                 self.m_spawnedTetrimino.move( deltaPos )
         elif key == pygame.K_DOWN:
             self.moveTetriminoDown()
+        elif key == pygame.K_SPACE :
+            while (not self.m_spawnedTetrimino.shouldFixToBoard( self.m_board )):
+                self.m_spawnedTetrimino.move((0, 1))
+
+
         return
 
 
     def update( self ):
+        if self.i_am_paused:
+            return
         # time to update the position of the spawned tetrimino (gravity)?
         currentTime = pygame.time.get_ticks()
         timeToMoveDown = currentTime - score.ScoreManager.s_speed >= self.m_lastUpdateTimeMS
