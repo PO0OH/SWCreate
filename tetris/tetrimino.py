@@ -281,9 +281,10 @@ class TetriminoManager:
             if self.m_spawnedTetrimino.willCollideWithBoard( deltaPos, self.m_board, False ) == False: 
                 self.m_spawnedTetrimino.move( deltaPos )
         elif key == pygame.K_DOWN:
-            self.moveTetriminoDown(1)
+            self.moveTetriminoDown()
         elif key == pygame.K_SPACE :
-            self.moveTetriminoDown(2)
+            self.moveTetriminoDown()
+
         return
 
 
